@@ -6,27 +6,20 @@ const helperTextUsuario = document.getElementById('helper-text-usuario')
 
 // 2. Funções
 function gerarUsuario(){
-    const resposta = fetch('https://random-data-api.com/api/v2/users')
-    console.log(resposta)
-
-    const tratamentoResposta = resposta.then((res) => {
-        console.log(res)
-        return res.json() //JSON.parsed es lo mismo
-
-    })
-
-    tratamentoResposta.then((data) => {
+    fetch('https://random-data-api.com/api/v2/users')
+     .then((res) => res.json())
+     .then((data) => {
+        const usuario = document.createElement('div')
+        usuario.innerHTML = `
+        <img src="${data.avatar}" />
+        <span><strong>Username:</strong>${data.username}</span>
+         `
+        usuariosContainer.appendChild(usuario) 
         console.log(data)
-
+    
     })
 
 }
-
-// Forma simplificada de usar Metodo fetch
-
-    // fetch('https://random-data-api.com/api/v2/users')
-    // .then((res) => res.json)
-    // .then((data) => console.log(data))
 
 // 3. Eventos
 btnUsuario.addEventListener('click', gerarUsuario)
