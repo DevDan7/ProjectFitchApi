@@ -6,6 +6,11 @@ const helperTextUsuario = document.getElementById('helper-text-usuario')
 
 // 2. Funções
 function gerarUsuario(){
+
+// Agregamos este metodo con el mesaje Carregando . . .
+
+    helperTextUsuario.innerText = 'Carregando. . .'
+
     fetch('https://random-data-api.com/api/v2/users')
      .then((res) => res.json())
      .then((data) => {
@@ -14,7 +19,10 @@ function gerarUsuario(){
         <img src="${data.avatar}" />
         <span><strong>Username:</strong>${data.username}</span>
          `
+        usuario.classList.add('usuario')
         usuariosContainer.appendChild(usuario) 
+        // Se agrego al final para despues de aparecer la imagen el aviso carregando desaparesca
+        helperTextUsuario.innerText = ''
         console.log(data)
     
     })

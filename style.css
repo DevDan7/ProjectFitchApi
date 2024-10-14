@@ -49,3 +49,21 @@ textarea {
   padding: 8px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+/* Se adiciono una clase usuario para hacer la estelizar */
+
+.usuario {
+  background-color: #EF7D19;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  margin-top: 8px;
+
+}
+
+/* Solo se esteliza la imagen del usuario */
+
+.usuario img {
+  height: 80px;
+}
