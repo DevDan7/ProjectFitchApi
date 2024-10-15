@@ -47,12 +47,52 @@ const postTitle = document.getElementById('post-title')
 const postBody = document.getElementById('post-body')
 const btnPost = document.getElementById('btn-post')
 const postsContainer = document.getElementById('posts-container')
-
+const helperTextPost = document.getElementById('helper-text-post')
+ 
 // 2. Funções
 
-function gerarPost(){
-    evento.prevenDefault()
+function gerarPost(evento){
+    helperTextPost.innerText = ''
+    evento.preventDefault()
 
+    const jsonBody = JSON.stringify({
+        titulo: postTitle.value,
+        mensagem: postBody.value
+    })
+
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST', 
+        headers: {
+           "Content-Type": "application/json"
+        },
+        body: jsonBody
+    
+    })
+    .then(res => res.json())
+    .then(data => {
+        const post = document.createElement('div')
+        post.classList.add('postagem')
+        post.innerHTML = `
+            <h3>${data.id} - ${data.titulo}</h3>
+            <P>${data.mensagem}</P>
+        `
+        // este evento lo usamo para colocar de primero las ultimas postagens
+        postsContainer.prepend(post)
+        
+        // Limpiar el formulario
+
+        postTitle.value = ''
+        postBody.value = ''
+        alert('Postagem criada con exito')
+        
+        
+    
+        console.log(data)})
+    .catch(() => {
+        helperTextPost.innerText = 'no fue posible mostrar la pagina'
+        console.log(err)
+    })
+    
 }
 // 3. Eventos
 
